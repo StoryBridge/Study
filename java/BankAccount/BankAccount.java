@@ -1,18 +1,18 @@
 public class BankAccount {
-    int balance;
-    Person owner;
+    private int balance;
+    private Person owner;
 
     // 파라미터 : 입금할 액수(정수)
     // 리턴 : 성공여부(불린)
     boolean deposit(int amount) {
         // 1. write code here
-        if( amount < 0 || owner.cashAmount < amount){
-            System.out.println("입금 실패입니다. 잔고: "+balance+"원, 현금: " + owner.cashAmount +"원");
+        if( amount < 0 || owner.getCashAmount() < amount){
+            System.out.println("입금 실패입니다. 잔고: "+balance+"원, 현금: " + owner.getCashAmount() +"원");
             return false;
         }else{
             balance += amount;
-            owner.cashAmount -= amount;
-            System.out.println(amount + "원 입금하였습니다. 잔고: "+balance+"원, 현금: "+owner.cashAmount+"원");
+            owner.setCashAmount(owner.getCashAmount() - amount);
+            System.out.println(amount + "원 입금하였습니다. 잔고: "+balance+"원, 현금: "+owner.getCashAmount()+"원");
             return true;
         }
     }
@@ -23,17 +23,34 @@ public class BankAccount {
         // 2. write code here
         if(amount < balance && amount >=0){
             balance -= amount;
-            owner.cashAmount += amount;
-            System.out.println(amount+"원 출금하였습니다. 잔고: "+balance+"원, 현금: "+owner.cashAmount+"원");
+            owner.setCashAmount(owner.getCashAmount() + amount);
+            System.out.println(amount+"원 출금하였습니다. 잔고: "+balance+"원, 현금: "+owner.getCashAmount()+"원");
             return true;
         }else{
-            System.out.println("출금 실패입니다. 잔고: "+balance+"원, 현금: "+owner.cashAmount+"원");
+            System.out.println("출금 실패입니다. 잔고: "+balance+"원, 현금: "+owner.getCashAmount()+"원");
             return false;
         }
                               
         
     }
 
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+
+	public Person getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Person owner) {
+		this.owner = owner;
+	}
+
+    
     // 첫 번째 파라미터 : 받는 사람(Person)
     // 두 번째 파라미터 : 이체할 금액(정수)
     // 리턴 : 성공여부(불린)
