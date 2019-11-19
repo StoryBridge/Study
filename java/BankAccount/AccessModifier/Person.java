@@ -1,5 +1,7 @@
 package accessmodifier;
 
+import java.awt.image.BandCombineOp;
+
 public class Person {
 	private String name;
 	private int age;
@@ -42,35 +44,42 @@ public class Person {
 	// 두 번째 파라미터: 이체할 금액 (정수)
 	// 리턴 : 성공여부 (불린)
 	public boolean transfer(Person to, int amount) {
-		boolean success;
-		if (amount < 0 || amount > account.getBalance()) {
-			success = false;
-		} else {
-			account.setBalance(account.getBalance() - amount);
-			to.getAccount().setBalance(to.getAccount().getBalance() + amount);
-			success = true;
-		}
-		// 결과값 출력
-		System.out.println(success + " - from: " + name + ", to: " + to.getName() + ", amount: " + amount
-				+ ", balance: " + account.getBalance());
-		return success;
+		return account.transfer(to.getAccount(), amount);
 	}
+	
+	public boolean transfer(BankAccount to, int amount) {
+		return account.transfer(to, amount);
+	}
+//	public boolean transfer(Person to, int amount) {
+//		boolean success;
+//		if (amount < 0 || amount > account.getBalance()) {
+//			success = false;
+//		} else {
+//			account.setBalance(account.getBalance() - amount);
+//			to.getAccount().setBalance(to.getAccount().getBalance() + amount);
+//			success = true;
+//		}
+//		// 결과값 출력
+//		System.out.println(success + " - from: " + name + ", to: " + to.getName() + ", amount: " + amount
+//				+ ", balance: " + account.getBalance());
+//		return success;
+//	}
 
 	// 첫 번째 파라미터: 받는 사람의 계정 (BankAccount)
 	// 두 번째 파라미터: 이체할 금액 (정수)
 	// 리턴 : 성공여부 (불린)
-	public boolean transfer(BankAccount to, int amount) {
-		boolean success;
-		if (amount < 0 || amount > account.getBalance()) {
-			success = false;
-		} else {
-			account.setBalance(account.getBalance() - amount);
-			to.setBalance(to.getBalance() + amount);
-			success = true;
-		}
-		// 결과값 출력
-		System.out.println(success + " - from: " + name + ", to: " + to.getOwner().getName() + ", amount: " + amount
-				+ ", balance: " + account.getBalance());
-		return success;
-	}
+//	public boolean transfer(BankAccount to, int amount) {
+//		boolean success;
+//		if (amount < 0 || amount > account.getBalance()) {
+//			success = false;
+//		} else {
+//			account.setBalance(account.getBalance() - amount);
+//			to.setBalance(to.getBalance() + amount);
+//			success = true;
+//		}
+//		// 결과값 출력
+//		System.out.println(success + " - from: " + name + ", to: " + to.getOwner().getName() + ", amount: " + amount
+//				+ ", balance: " + account.getBalance());
+//		return success;
+//	}
 }
